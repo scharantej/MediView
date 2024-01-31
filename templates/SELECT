@@ -1,0 +1,26 @@
+FROM `project.dataset.table`
+WHERE patient_id = @patient_id
+"""
+
+# Execute the query and retrieve the results
+results = client.query(query, parameters={'patient_id': patient_id}).result()
+
+# Prepare the data to be displayed in the table
+patient_data = []
+for row in results:
+patient_data.append(dict(row))
+
+return patient_data
+
+
+## Testing
+
+- To test the Flask application, run the following command from the command line:
+
+
+flask run
+
+
+- Once the server is running, navigate to the landing page URL (e.g., http://127.0.0.1:5000/) in a web browser.
+- Enter a patient's unique ID and submit the form.
+- The application should fetch the patient's data from BigQuery and display it in the 'patient_data.html' template.
